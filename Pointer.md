@@ -105,3 +105,32 @@ int main(){
 
 }
 ```
+### There is a good answer by claude AI which helps to understands pointer to pointer . Above example is used
+```
+double var2 = 500.25; 
+double* ptr2 = &var2; 
+double** ptr3 = &ptr2;
+```
+
+### **Visual Memory Layout:**
+```
+Memory:
+┌──────────────┐
+│ var2 = 500.25│ ← at address 0x1000
+└──────────────┘
+       ↑
+       │ (ptr2 points here)
+┌──────────────┐
+│ ptr2 = 0x1000│ ← at address 0x2000
+└──────────────┘
+       ↑
+       │ (ptr3 points here)
+┌──────────────┐
+│ ptr3 = 0x2000│ ← at address 0x3000
+└──────────────┘
+```
+```
+ptr3      // Address of ptr2 (e.g., 0x2000)
+*ptr3     // Value at 0x2000, which is ptr2 (e.g., 0x1000)
+**ptr3    // Value at 0x1000, which is var2 (500.25) 
+```
