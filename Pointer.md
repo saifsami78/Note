@@ -134,3 +134,5 @@ ptr3      // Address of ptr2 (e.g., 0x2000)
 *ptr3     // Value at 0x2000, which is ptr2 (e.g., 0x1000)
 **ptr3    // Value at 0x1000, which is var2 (500.25) 
 ```
+
+![Output of the above code](Pictures/PointerOutput.png)
