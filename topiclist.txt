@@ -1,0 +1,11 @@
+sliding window
+linked list
+Trees(Basic BST, Traversal)
+Graph(BFS, DFS)
+1 DP (very basic)
+
+-> Arrays And Hashing
+-> Two Pointer
+-> Stack
+-> Binary Search
+-> Greedy
