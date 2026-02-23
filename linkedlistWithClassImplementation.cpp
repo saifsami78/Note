@@ -64,6 +64,44 @@ public:
         }
     }
 
+    void makeCycleToHead(){ //make a cycle
+        if(head == NULL) return;
+
+        node* temp = head;
+        while(temp->next != NULL){
+            temp = temp->next;
+        }
+
+        temp->next = head;  // create cycle
+    }
+
+    void ReverseLinkedlist(){
+        node* prev = NULL;
+        node* current = head;
+        node* nextNode = NULL;
+        while(current != NULL){
+            nextNode = current->next;
+            current->next = prev;
+            prev = current;
+            current = nextNode;
+        }
+        head = prev;
+
+    }
+
+    bool hasCycle(){
+        node* fast = head;
+        node* slow = head;
+        while(fast != nullptr && fast-> next != NULL){
+            slow = slow->next;
+            fast = fast-> next-> next;
+            if(slow == fast){
+                return true;
+            }
+        }
+        return false;
+    }
+
     void show(){
         node* iteration = head;
 
@@ -76,15 +114,14 @@ public:
 
 int main(){
 
-    LinkedList list;
+    
 
-    list.add(5);
-    list.add(5);
+    LinkedList list2;
+    list2.add(5);
+    list2.add(14);
+    list2.add(10);
+    list2.add(15);
+    list2.makeCycleToHead();
+    cout << list2.hasCycle() << endl;
 
-    list.RemoveFirstOccurance(5);
-
-    cout << "-------------------" << endl;
-    list.show();
-
-    list.RemoveFirstOccurance(36);
 }

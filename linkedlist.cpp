@@ -31,6 +31,21 @@ void add(int value){
 	}
 }
 
+
+void ReverseLinkedlist(){
+	node* prev = NULL;
+	node* current = head;
+	node* nextNode = NULL;
+	while(current != NULL){
+		nextNode = current->next;
+		current->next = prev;
+		prev = current;
+		current = nextNode;
+	}
+	head = prev;
+
+}
+
 void RemoveFirstOccurance(int x){
 
 	if(head == NULL){
@@ -78,16 +93,18 @@ void show(){
 
 int main(){
 
-	//add(1);
+	add(1);
 	add(5);
 	add(5);
-	//add(7);
-	RemoveFirstOccurance(5);
-	//RemoveFirstOccurance(36);
-	cout << "-------------------"<< endl;
-	show();
+	add(7);
+	//RemoveFirstOccurance(5);
 	RemoveFirstOccurance(36);
-
-
+	cout << "-------------------"<< endl;
+	
+	add(36);
+	add(13);
+	show();
+	ReverseLinkedlist();
+	show();
 }
 
