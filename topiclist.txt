@@ -9,3 +9,30 @@ Graph(BFS, DFS)
 -> Stack
 -> Binary Search
 -> Greedy
+
+
+
+Leetcode 75 topic list
+
+-> Array/ String
+-> Two Pointers
+-> Sliding Window
+-> Prefix Sum
+-> Map/ Set
+-> Stack/ Queue
+-> Linked List
+-> Binary Tree - DFS (I will ignore)
+-> Binary Tree - BFS (I will ignore)
+-> Binary Search Tree (I will ignore)
+-> Graphs - DFS
+-> Graphs - BFS
+-> Heap / Priority Queue
+-> Binary Search
+-> Backtracking (I will ignore)
+-> DP - 1D
+-> DP - Multidimensional (I will ignore)
+-> Bit Manipulation (I will ignore)
+-> Trie (I will ignore)
+-> Intervals (I will ignore)
+-> Monotonic Stack (I will ignore)
+
