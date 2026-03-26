@@ -45,16 +45,17 @@ int main() {
 
  Access modifier controls who can get access to the data (variables) and methods(function)
 
-### In C++ there are 3 access modifier
+**In C++ there are 3 access modifier**
+
 
 - Public 
 - Private
 - Protected
 
-**By default, everything is private in C++**
+*By default, everything is private in C++*
 
 
-## Access Modifier's Comparison  Chart
+### Access Modifier's Comparison  Chart
 
 | Modifier  | Same Class | Derived Class | Outside Class |
 | --------- | ---------- | ------------- | ------------- |
