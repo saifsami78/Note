@@ -9,7 +9,7 @@
 
 | Action | Shortcut |
 |--------|----------|
-| Open preview (side by side) | `Ctrl + K` then `V` |
+| Open preview (side by side) | `Ctrl + K` then `Vi di ` |
 | Open preview in current tab | `Ctrl + Shift + V` |
 
 Or right-click the `.md` file tab → **Open Preview**.
