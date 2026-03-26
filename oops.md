@@ -37,7 +37,7 @@ int main() {
 > Here Car is the class and Car1 and Car2 are the object. Again here, speed and  brand are attribute and drive are the method 
 
 
----
+
 
 ## Access Modifier 
 
@@ -67,9 +67,9 @@ int main() {
 - Private (Only me / Open to only same class)
 - Protected (Family Only / me + inherited class )
 
----
 
-### 4 major topics in OOPS
+
+### Four Big Topics in OOPS
 
 - Encapsulation
 - Abstraction
@@ -167,7 +167,7 @@ int main(){
    cout << m1.getMark() << endl; // Output :45
 }
 ```
----
+
 ## Constructor
 > A constructor is a special method function which is automatically called while object creation.
 
@@ -203,7 +203,7 @@ public:
 };
 ```
 > On the above example, there are 3 constructor. They are different only in taking input values. These stuff is known as construction overloading 
-----
+
 ## This Pointer
 
 
