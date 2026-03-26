@@ -57,9 +57,9 @@ int main() {
 
 | Modifier  | Same Class | Derived Class | Outside Class |
 | --------- | ---------- | ------------- | ------------- |
-| Public    | ✅ Yes      | ✅ Yes         | ✅ Yes         |
-| Protected | ✅ Yes      | ✅ Yes         | ❌ No          |
-| Private   | ✅ Yes      | ❌ No          | ❌ No          |
+| Public    |  Yes      |  Yes         |  Yes         |
+| Protected |  Yes      |  Yes         |  No          |
+| Private   |  Yes      |  No          |  No          |
 
 ### To easily Remember
 
@@ -75,7 +75,7 @@ int main() {
 - Abstraction
 - Inheritance
 - Polymorphism
----
+
 ## Encapsulation
 > Encapsualtion is wrapping up of data and member function into a single unit called class and exposes only what's needed
 
@@ -167,5 +167,45 @@ int main(){
    cout << m1.getMark() << endl; // Output :45
 }
 ```
+---
+## Constructor
+> A constructor is a special method function which is automatically called while object creation.
+
+**Characteristics of Constructor**
+- It has same name as class
+- No return type (Not even void)
+- Only called **once**(automatically while object creation)
+- If we create one or many custom constructor, then we have to use one of those custom constructor. We can't use default constructor anymore.
+- Constructor creation happens only when an object is called
+
+***Here is an example of constructor***
+```cpp
+class Car {
+private:
+    int speed;
+
+public:
+    string brand;
+
+    Car(){
+
+    }
+    Car(string b){
+        brand = b;
+    }
+
+    Car(string b, int s) {
+        brand = b;
+        speed = s;
+    }
+
+    
+};
+```
+> On the above example, there are 3 constructor. They are different only in taking input values. These stuff is known as construction overloading 
+----
+## This Pointer
+
+
 
 
