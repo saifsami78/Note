@@ -1,4 +1,4 @@
-# Class & Object
+## Class & Object
 
 A class is like a blueprint basically a template. An object is an instances of that class. An class contains variables and methods(function) to describe the object. 
 
@@ -39,7 +39,7 @@ int main() {
 
 ---
 
-# Access Modifier 
+## Access Modifier 
 
  Access modifier controls who can get access to the data (variables) and methods(function)
 
@@ -53,7 +53,7 @@ int main() {
 *By default, everything is private in C++*
 
 
-## Access Modifier's Comparison  Chart
+### Access Modifier's Comparison  Chart
 
 | Modifier  | Same Class | Derived Class | Outside Class |
 | --------- | ---------- | ------------- | ------------- |
@@ -138,5 +138,34 @@ int main(){
 - Access Modifiers = tools (how you implement it)
 - Encapsulation tells the concept - Hide data + control access
 - Access Modifiers is the tools by which we acheive it; (private, public, protected) → by which we achieve it
-> T
+> We often use getter and setter to access and change value of private data. Here is an example
+
+
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Marks{
+private:
+    int mark;
+public: 
+    void setMark(int p){
+        if(p >= 0){
+            mark = p;
+        }
+    }
+    int getMark(){
+        return mark;
+    }
+};
+
+
+int main(){
+   Marks m1;
+   m1.setMark(45);
+   cout << m1.getMark() << endl; // Output :45
+}
+```
+
 
