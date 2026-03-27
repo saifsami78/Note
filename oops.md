@@ -277,8 +277,55 @@ int main(){
 ```
 ![shallow](Pictures/shallow.png)
 
+
 As we can see Car1's tiresize also changed as both were pointing to the same memory address. Without pointer , this issue don't occur. Now there is something called Deep copy which we can use to solve this issue;
 
 #### Deep Copy 
-> Deep copy always copies the value, it never copies the memory address just like Shallow Copy
+> Deep copy always copies the value, it never copies the memory address just like Shallow Copy. In pointer , it first create its dynamic memory and then put the value on it . 
 
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    string brandName;
+    int *tiresize;
+
+    Car(string b, int *p){
+        brandName = b;
+        tiresize = p;
+    }
+    Car(Car &obj){
+        this->brandName = obj.brandName;
+        this->tiresize = new int;
+        *this->tiresize = *obj.tiresize;
+    }
+    void getinfo(){
+        cout << this->brandName << endl;
+        cout << *this->tiresize << endl;
+    }
+};
+
+int main(){
+    int a = 55;
+    Car Car1("Honda", &a);
+    
+    Car Car2(Car1);
+    *Car2.tiresize = 44;
+    cout << "-------------" << endl;
+    Car1.getinfo();
+    Car2.getinfo();
+}
+```
+
+The output : 
+
+![deep](Pictures/deep.png)
+
+Now we have fixed it with deep copy. 
+
+> Please check how to send and receive an object in constructor and function while revision
+
+
+---
