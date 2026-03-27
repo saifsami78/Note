@@ -232,6 +232,53 @@ void setName(string name) {
 ```
 ## Copy Constructor
 
+> Copy constructor is a special type of constructor that copies from one object thing to another object
 
+Now there is a default copy constructor in C++ which use shallow copying. 
 
+`Student S2(S1); ` // Here , this is how default constructor can be called.All values of s2 will be assigned same as S1;
+
+Two types of copy constructor: 
+- Shallow Copy 
+- Deep Copy 
+#### Shallow Copy 
+> Shallow copy is fine for regular variables as it copies its value. But problem arises , when it is used on a pointer variables, as it copies only the address. Because , this copies only the address , both object share the same locations. Changing one variables value will change another variables value . In case of deleting one memory address, other pointer will point to a variable that does not even exist. 
+
+Lets see an example: 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    string brandName;
+    int *tiresize;
+
+    Car(string b, int *p){
+        brandName = b;
+        tiresize = p;
+    }
+    void getinfo(){
+        cout << this->brandName << endl;
+        cout << *this->tiresize << endl;
+    }
+};
+
+int main(){
+    int a = 55;
+    Car Car1("Honda", &a);
+    Car1.getinfo(); 
+    Car Car2(Car1);
+    cout << "-------------" << endl;
+    Car1.getinfo();
+    Car2.getinfo();
+}
+```
+![shallow](Pictures/shallow.png)
+
+As we can see Car1's tiresize also changed as both were pointing to the same memory address. Without pointer , this issue don't occur. Now there is something called Deep copy which we can use to solve this issue;
+
+#### Deep Copy 
+> Deep copy always copies the value, it never copies the memory address just like Shallow Copy
 
