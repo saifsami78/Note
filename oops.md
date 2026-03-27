@@ -205,6 +205,32 @@ public:
 > On the above example, there are 3 constructor. They are different only in taking input values. These stuff is known as construction overloading 
 
 ## This Pointer
+> This is an implicit(hidden) pointer that is automatically available and it points to the current object that is calling the function
+
+```cpp
+class Car {
+private:
+    string name;
+    int speed;
+
+public:
+    void setName(string name) {   // same name as member!
+        this->name = name;        // this->name = member, name = parameter
+    }
+
+    void setSpeed(int speed) {    // same name as member!
+        this->speed = speed;
+    }
+};
+```
+Now here if we don't use this , compiler can't distinguish between parameter and member data, 
+
+```cpp
+void setName(string name) {
+    name = name;  // what comiler do, parameter = parameter , happens nothing
+}
+```
+## Copy Constructor
 
 
 
