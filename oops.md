@@ -329,3 +329,309 @@ Now we have fixed it with deep copy.
 
 
 ---
+### Polymorphism 
+
+> Polymorphism = “many forms” . In simpler terms, it means the same function name can behave differently depending on the what is calling them.
+
+#### There are two types of Polymorphism 
+- Compile Time Polymorphism
+- Run Time Polymorphism
+
+
+#### Compile Time Polymorphism 
+- this occurs when the compiler selects the appropriate function at the time of compilation
+
+There are two types of compile time Polymorphism. 
+1. Function Overloading 
+2. Operator Overloading
+
+#### Function Overloading 
+- Same function name but different parameter(different can be made by number of parameter or parameter input type or both)
+- Note that , comiler can't differentiate with return type. So, in case function name and parameter is same but return type different , that won't work . 
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    
+    void print(int x){
+        cout << x << endl;
+    }
+    void print(double x){
+        cout << x << endl;
+    }
+    void print(string x){
+        cout << x << endl;
+    }
+};
+
+int main(){
+    
+    Car C1;
+    C1.print(10);
+    C1.print(10.5);
+    C1.print("Honda");
+
+}
+```
+- Constructor overloading is also one kind of function overloading.
+
+#### Operator Overloading 
+- Will Add Soon
+
+
+> What is the difference between function overloading and function overriding ? 
+
+\- In Same class when we use different function with same name , just with different parameter , we call it function overloading. But when we inheritted any class, if the same function exist in both parent class and child class , we call it function overriding.
+
+#### Runtime Polymorphism 
+- Runtime polymorphism occurs only when in the runtime proper function is invoked
+we use virtual function to acheive this. 
+
+Let us know the properties of virtual function
+1. Virtual function are dynamic in nature
+2. It is defined with the keyword "virtual" inside a base class and are always declared with a base class and overridden in a child class. 
+
+Below is an example : 
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    
+    virtual void sound(){
+        cout << "Peep ! Peep" << endl;
+    }
+};
+
+class Bike: public Car{
+public:
+    void sound(){
+        cout << "Boom Boom" << endl;
+    }
+};
+
+int main(){
+    Car* ptr;
+    Bike B1;
+    ptr = &B1;
+    ptr->sound();
+}
+```
+
+Its very easy to worngly understand Runtime Polymorphism , Here is a good answer by Claude : 
+
+### Runtime Polymorphism — Complete Guide
+
+#### 1. What is it?
+
+> A **base class pointer** points to a **derived class object**, and the correct function is called **automatically at runtime.**
+
+
+#### 2. The 3 Must-Have Ingredients
+
+```
+1. virtual keyword in base class
+2. override in derived class
+3. Base class POINTER pointing to derived object
+```
+**All 3 are required. Missing even one = not runtime polymorphism.**
+
+---
+
+#### 3. Build It From Scratch
+
+#### ❌ Stage 1 — Plain Overriding (NOT runtime polymorphism)
+```cpp
+class Car {
+public:
+    void sound() {                    // no virtual
+        cout << "Peep Peep\n";
+    }
+};
+
+class Bike : public Car {
+public:
+    void sound() {                    // just overriding
+        cout << "Boom Boom\n";
+    }
+};
+
+int main() {
+    Bike B1;
+    B1.sound();     // prints "Boom Boom" — but decided at COMPILE time
+}                   // NOT runtime polymorphism
+```
+
+---
+
+#### ❌ Stage 2 — Added virtual, but wrong pointer
+```cpp
+class Car {
+public:
+    virtual void sound() {            // ✅ virtual added
+        cout << "Peep Peep\n";
+    }
+};
+
+class Bike : public Car {
+public:
+    void sound() {
+        cout << "Boom Boom\n";
+    }
+};
+
+int main() {
+    Bike* ptr;                        // ❌ Bike pointer — wrong!
+    Bike B1;
+    ptr = &B1;
+    ptr->sound();   // still compile time — pointer type is Bike*
+}
+```
+
+---
+
+#### ✅ Stage 3 — All 3 ingredients (CORRECT!)
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car {
+public:
+    virtual void sound() {            // ✅ ingredient 1: virtual
+        cout << "Peep Peep\n";
+    }
+    virtual ~Car() {}                 // ✅ always add virtual destructor
+};
+
+class Bike : public Car {
+public:
+    void sound() override {           // ✅ ingredient 2: override
+        cout << "Boom Boom\n";
+    }
+};
+
+int main() {
+    Car* ptr;                         // ✅ ingredient 3: BASE class pointer
+    Bike B1;
+    ptr = &B1;                        // base pointer → derived object
+
+    ptr->sound();                     // ✅ RUNTIME decision → "Boom Boom"
+}
+```
+
+---
+
+#### 4. What Happens Inside — vtable
+
+When you write `virtual`, C++ secretly creates a **vtable** (function lookup table):
+
+```
+Car's vtable                Bike's vtable
+┌─────────────────┐         ┌─────────────────┐
+│ sound() → Car   │         │ sound() → Bike  │
+└─────────────────┘         └─────────────────┘
+
+ptr = &B1
+        │
+        ▼
+   Bike object
+   vptr ──→ Bike's vtable
+              └── sound() → calls Bike::sound() ✅
+```
+At runtime, `ptr->sound()` follows the `vptr` → finds Bike's vtable → calls `Bike::sound()`.
+
+---
+
+## 5. Real Power — One Pointer, Many Objects
+
+```cpp
+int main() {
+    Car* ptr;
+
+    Bike B1;
+    ptr = &B1;
+    ptr->sound();       // "Boom Boom"
+
+    Car C1;
+    ptr = &C1;
+    ptr->sound();       // "Peep Peep"
+}
+```
+
+**Same pointer, different objects, different behavior — automatically!**
+
+---
+
+## 6. Ultimate Power — Array of Base Pointers
+
+```cpp
+class Car {
+public:
+    virtual void sound() { cout << "Peep Peep\n"; }
+    virtual ~Car(){}
+};
+class Bike : public Car {
+public:
+    void sound() override { cout << "Boom Boom\n"; }
+};
+class Truck : public Car {
+public:
+    void sound() override { cout << "Honk Honk\n"; }
+};
+class Bus : public Car {
+public:
+    void sound() override { cout << "Beep Beep\n"; }
+};
+
+int main() {
+    Car* garage[4];                // array of base pointers
+
+    garage[0] = new Bike();
+    garage[1] = new Truck();
+    garage[2] = new Bus();
+    garage[3] = new Car();
+
+    for(int i = 0; i < 4; i++) {
+        garage[i]->sound();        // each calls its OWN version ✅
+    }
+
+    // Output:
+    // Boom Boom
+    // Honk Honk
+    // Beep Beep
+    // Peep Peep
+}
+```
+**One loop, one function call — 4 different behaviors. This is the real power!**
+
+---
+
+#### 7. Your Journey Today
+
+```
+Attempt 1: no virtual + direct object          ❌ compile time
+Attempt 2: virtual  + direct object            ❌ compile time
+Attempt 3: virtual  + Bike* ptr = &BikeObj     ❌ compile time
+Attempt 4: virtual  + Car*  ptr = &BikeObj     ✅ RUNTIME ← correct!
+Attempt 5: virtual  + Bike* ptr = &BikeObj     ❌ went back to attempt 3
+```
+
+---
+
+## 8. One Final Rule — Never Forget
+
+```
+❌  Derived* ptr = &DerivedObj  →  compile time (same type)
+✅  Base*    ptr = &DerivedObj  →  runtime      (different type, virtual)
+```
+
+| What you write | Result |
+|---|---|
+| `Bike B1; B1.sound()` | ❌ Compile time |
+| `Bike* ptr = &B1` | ❌ Compile time |
+| `Car* ptr = &B1` without virtual | ❌ Compile time (calls Car's version) |
+| `Car* ptr = &B1` with virtual | ✅ **Runtime Polymorphism** |
