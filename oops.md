@@ -393,6 +393,7 @@ we use virtual function to acheive this.
 Let us know the properties of virtual function
 1. Virtual function are dynamic in nature
 2. It is defined with the keyword "virtual" inside a base class and are always declared with a base class and overridden in a child class. 
+3. Virtual Function is called during runtime
 
 Below is an example : 
 ```cpp
@@ -422,7 +423,7 @@ int main(){
 }
 ```
 
-Its very easy to worngly understand Runtime Polymorphism , Here is a good answer by Claude : 
+## Its very easy to worngly understand Runtime Polymorphism , Here is a good answer by Claude : 
 
 ### Runtime Polymorphism — Complete Guide
 
@@ -610,28 +611,3 @@ int main() {
 
 ---
 
-#### 7. Your Journey Today
-
-```
-Attempt 1: no virtual + direct object          ❌ compile time
-Attempt 2: virtual  + direct object            ❌ compile time
-Attempt 3: virtual  + Bike* ptr = &BikeObj     ❌ compile time
-Attempt 4: virtual  + Car*  ptr = &BikeObj     ✅ RUNTIME ← correct!
-Attempt 5: virtual  + Bike* ptr = &BikeObj     ❌ went back to attempt 3
-```
-
----
-
-## 8. One Final Rule — Never Forget
-
-```
-❌  Derived* ptr = &DerivedObj  →  compile time (same type)
-✅  Base*    ptr = &DerivedObj  →  runtime      (different type, virtual)
-```
-
-| What you write | Result |
-|---|---|
-| `Bike B1; B1.sound()` | ❌ Compile time |
-| `Bike* ptr = &B1` | ❌ Compile time |
-| `Car* ptr = &B1` without virtual | ❌ Compile time (calls Car's version) |
-| `Car* ptr = &B1` with virtual | ✅ **Runtime Polymorphism** |
