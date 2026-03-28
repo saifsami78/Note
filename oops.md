@@ -327,7 +327,20 @@ Now we have fixed it with deep copy.
 
 > Please check how to send and receive an object in constructor and function while revision
 
+### Destructor 
+> A destructor is a special function that is automatically called when an object is destroyed (goes out of scope or deleted).It's the opposite of a constructor.This is also automatically invoked
 
+```cpp
+class Box {
+public:
+    Box() {               // constructor — ~ is absent
+        cout << "Box created!" << endl;
+    }
+
+    ~Box() {              // destructor — notice the ~ symbol
+        cout << "Box destroyed!" << endl;
+    }
+};
 ---
 ### Polymorphism 
 
@@ -379,7 +392,7 @@ int main(){
 - Constructor overloading is also one kind of function overloading.
 
 #### Operator Overloading 
-- Will Add Soon
+- Will Add Soon ❌
 
 
 > What is the difference between function overloading and function overriding ? 
@@ -609,5 +622,170 @@ int main() {
 ```
 **One loop, one function call — 4 different behaviors. This is the real power!**
 
----
+
+
+## Abstraction
+
+> Abstraction means hiding implementations details and showing only what is necessary to show
+
+### Abstraction Class
+
+1. We can't create object of an abstraction class
+2. It serves as blueprint for the derived class
+3. A class becomes abstract when it has at least one pure  virtual function
+
+## Pure Virtual Function
+
+`virtual void functionName() = 0;  // = 0 makes it pure virtual`
+
+> The = 0 means: I declare this function but provide no implementation — derived classes MUST implement it.
+
+**An Example**
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    
+    virtual void sound() = 0;
+    virtual void color() = 0;
+};
+
+class Bike: public Car{
+public:
+    void sound(){
+        cout << "Boom Boom" << endl;
+    }
+    void color(){
+        cout << "Its red color" << endl;
+    }
+};
+
+int main(){
+    
+    //Car C1; // We can't create instances of an abstract class
+    Bike B1;
+    B1.sound();
+    B1.color();
+}
+```
+#### Difference between Abstract class and Interface 
+> The above example is the example of both Abstract class and interface(Pure Abstraction). It has no data member or any nomal function. If there is any data member or any other function except pure virtual function it becomes abstract class only(Not interface ).
+
+***Example:***
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+class Car{
+public:
+    
+    virtual void sound() = 0;
+    virtual void color() = 0;
+    void dhaka(){
+        cout << "Ye Ye" << endl;
+    }
+};
+
+class Bike: public Car{
+public:
+    void sound(){
+        cout << "Boom Boom" << endl;
+    }
+    void color(){
+        cout << "Its red color" << endl;
+    }
+};
+
+int main(){
+    
+    //Car C1; // We can't create instances of an abstract class
+    Bike B1;
+    B1.sound();
+    B1.color();
+}
+```
+## The "static" Keyword
+> Static = "shared " or "live longer than usual "
+Lets Look at a normal function : 
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int count(){
+    static int x = 5;
+    x++;
+    return x;
+}
+
+int main(){
+    
+   cout << count() << endl;
+   cout << count() << endl;
+   cout<< count() << endl;
+
+}
+```
+Output: 
+![Output](Pictures/ok.png)
+> Rule: Static local variable is created once, and lives until the program ends — but its scope is still only inside that function.
+
+#### Static Data Member
+A normal data member(Variable) — every object gets its own copy.
+A static data member(Variable) — shared by ALL objects of that class.
+```cpp
+class Student {
+public:
+    string name;
+    static int totalStudents;  // shared by all — only ONE copy exists
+
+    Student(string n) {
+        name = n;
+        totalStudents++;        // every new object increments it
+    }
+};
+
+// Must define outside the class
+int Student::totalStudents = 0;
+
+int main() {
+    Student s1("Alice");
+    Student s2("Bob");
+    Student s3("Charlie");
+
+    cout << Student::totalStudents << endl;  // 3
+    cout << s1.totalStudents << endl;        // 3 — same value
+    cout << s2.totalStudents << endl;        // 3 — same value
+}
+```
+#### Static Function 
+
+- Does not belong to any object — belongs to the class itself
+- Can be called without creating an object
+- Can only access static data members (has no this pointer)
+
+```cpp
+class Student {
+public:
+    string name;
+    static int totalStudents;
+
+    Student(string n) : name(n) { totalStudents++; }
+
+    // static function
+    static void showTotal() {
+        cout << "Total students: " << totalStudents << endl;
+        // cout << name << endl;  ❌ ERROR — can't access non-static member
+    }
+};
+```
+#### Static Visibility
+`static int secret = 42;   // only accessible in file1.cpp`
+If we create a static function like this its visibility is limited to that file
+
+## NOT DONE 
+1. Inheritance 
+2. Friend Function And Friend Class
 
