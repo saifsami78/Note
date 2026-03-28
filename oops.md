@@ -783,6 +783,7 @@ public:
 ```
 #### Static Visibility
 `static int secret = 42;   // only accessible in file1.cpp`
+
 If we create a static function like this its visibility is limited to that file
 
 ## NOT DONE 
